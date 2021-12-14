@@ -17,13 +17,13 @@ afterAll( async()=>{
 test('Check title of page', async()=>{
     const pageTitle = await driver.findElement(By.xpath('//h1')).getText()
     expect(pageTitle).toEqual('Movie List')
-    await driver.sleep(2000)
+    await driver.sleep(200)
 })
 
 test('Check if add button exists', async()=>{
     const addButton = await driver.findElement(By.xpath('//button[contains(text(), "Add")]')).getText()
     expect(addButton).toEqual('Add')
-    await driver.sleep(2000)
+    await driver.sleep(200)
 })
 
 test('Check if crossing out movie works', async()=>{
@@ -33,18 +33,16 @@ test('Check if crossing out movie works', async()=>{
     await driver.findElement(By.xpath('//span[contains(text(), "Delta Force")]')).click()
     const checkedMovie = await driver.findElement(By.xpath('//span[@class="checked"]'))
     expect(checkedMovie).toBeTruthy();
-await driver.sleep(2000)
+    await driver.sleep(200)
 })
 
 test('Check if delete movie works', async()=>{
     await driver.findElement(By.css('input')).sendKeys('Castaway')
     await driver.findElement(By.xpath('//button[contains(text(), "Add")]')).click()
-    const existingMovie= await driver.findElement(By.xpath('//span[contains(text(), "Castaway")]'));
     await driver.findElement(By.xpath('//button[contains(text(), "x")]')).click()
     const movieList = await driver.findElement(By.css('ul')).getText();
     expect(movieList).toEqual('')
-
-await driver.sleep(5000)
+    await driver.sleep(200)
 })
 
 test('Check if deleting move brings up notification', async()=>{
@@ -53,6 +51,5 @@ test('Check if deleting move brings up notification', async()=>{
     await driver.findElement(By.xpath('//button[contains(text(), "x")]')).click()
     const deleteNotification = await driver.findElement(By.css('aside')).getText();
     expect(deleteNotification).toContain('deleted!')
-
-await driver.sleep(5000)
+    await driver.sleep(200)
 })

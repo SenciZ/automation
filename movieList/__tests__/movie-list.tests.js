@@ -35,3 +35,14 @@ test('Check if crossing out movie works', async()=>{
     expect(checkedMovie).toBeTruthy();
 await driver.sleep(2000)
 })
+
+test('Check if delete movie works', async()=>{
+    await driver.findElement(By.css('input')).sendKeys('Castaway')
+    await driver.findElement(By.xpath('//button[contains(text(), "Add")]')).click()
+    const existingMovie= await driver.findElement(By.xpath('//span[contains(text(), "Castaway")]'));
+    await driver.findElement(By.xpath('//button[contains(text(), "x")]')).click()
+    const movieList = await driver.findElement(By.css('ul')).getText();
+    expect(movieList).toEqual('')
+
+await driver.sleep(5000)
+})

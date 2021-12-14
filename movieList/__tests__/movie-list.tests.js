@@ -46,3 +46,13 @@ test('Check if delete movie works', async()=>{
 
 await driver.sleep(5000)
 })
+
+test('Check if deleting move brings up notification', async()=>{
+    await driver.findElement(By.css('input')).sendKeys('SuperTroopers')
+    await driver.findElement(By.xpath('//button[contains(text(), "Add")]')).click()
+    await driver.findElement(By.xpath('//button[contains(text(), "x")]')).click()
+    const deleteNotification = await driver.findElement(By.css('aside')).getText();
+    expect(deleteNotification).toContain('deleted!')
+
+await driver.sleep(5000)
+})
